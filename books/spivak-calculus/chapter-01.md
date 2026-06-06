@@ -29,6 +29,20 @@ Everything in elementary algebra follows from a small list of axioms —
 the point of the chapter is to see *which* axioms are doing the work.
 :::
 
+The chapter closes with the triangle inequality,
+$|a + b| \le |a| + |b|$ — the picture to keep in mind:
+
+```tikz
+\begin{tikzpicture}[scale=1.3, >=Stealth]
+  \coordinate (O) at (0,0);
+  \coordinate (A) at (3,0.9);
+  \coordinate (B) at (4.1,2.9);
+  \draw[->, thick] (O) -- (A) node[midway, below right] {$a$};
+  \draw[->, thick] (A) -- (B) node[midway, right] {$b$};
+  \draw[->, thick, blue] (O) -- (B) node[midway, above left] {$a+b$};
+\end{tikzpicture}
+```
+
 ## Exercises
 
 ### Exercise 1.1

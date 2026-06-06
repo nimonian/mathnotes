@@ -1,5 +1,6 @@
 import { defineConfig } from 'vitepress'
 import container from 'markdown-it-container'
+import { tikzPlugin } from './tikz.mjs'
 import fs from 'node:fs'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
@@ -108,7 +109,10 @@ export default defineConfig({
 
   markdown: {
     math: true,
-    config: mathEnvPlugin,
+    config(md) {
+      mathEnvPlugin(md)
+      tikzPlugin(md)
+    },
   },
 
   themeConfig: {

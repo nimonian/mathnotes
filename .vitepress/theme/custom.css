@@ -22,6 +22,42 @@
   margin: 8px 0 0;
 }
 
+/* TikZ figures */
+
+figure.tikz {
+  margin: 24px auto;
+  text-align: center;
+  /* Diagrams use currentColor for black strokes/labels, so they follow
+     the theme's text colour in dark mode. */
+  color: var(--vp-c-text-1);
+}
+
+figure.tikz svg {
+  display: inline-block;
+  max-width: 100%;
+  height: auto;
+}
+
+.tikz-error {
+  margin: 16px 0;
+  padding: 12px 20px;
+  border-radius: 8px;
+  background-color: var(--vp-c-red-soft);
+  border-left: 4px solid var(--vp-c-red-1);
+}
+
+.tikz-error .tikz-error-title {
+  font-weight: 700;
+  margin: 0 0 8px;
+}
+
+.tikz-error pre {
+  margin: 0;
+  overflow-x: auto;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
 /* Accent colour per environment */
 .math-env-definition {
   border-left-color: var(--vp-c-green-1);
