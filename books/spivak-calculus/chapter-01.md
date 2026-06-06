@@ -49,18 +49,22 @@ $|a + b| \le |a| + |b|$ — the picture to keep in mind:
 
 > Prove that if $ax = a$ for some $a \ne 0$, then $x = 1$.
 
+::: proof
 Since $a \ne 0$, the inverse $a^{-1}$ exists. Then
 
 $$
-x = 1 \cdot x = (a^{-1} a) x = a^{-1}(a x) = a^{-1} a = 1. \qquad \blacksquare
+x = 1 \cdot x = (a^{-1} a) x = a^{-1}(a x) = a^{-1} a = 1.
 $$
+:::
 
 ### Exercise 1.2
 
 > Prove that $x^2 - y^2 = (x - y)(x + y)$.
 
+::: proof
 Expanding the right-hand side using distributivity:
 
 $$
-(x - y)(x + y) = x^2 + xy - yx - y^2 = x^2 - y^2. \qquad \blacksquare
+(x - y)(x + y) = x^2 + xy - yx - y^2 = x^2 - y^2.
 $$
+:::

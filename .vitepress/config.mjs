@@ -1,6 +1,7 @@
 import { defineConfig } from 'vitepress'
 import container from 'markdown-it-container'
 import { tikzPlugin } from './tikz.mjs'
+import { macros } from './macros.mjs'
 import fs from 'node:fs'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
@@ -22,6 +23,20 @@ const MATH_ENVS = [
 ]
 
 function mathEnvPlugin(md) {
+  // ::: proof — italic "Proof." header (or a custom one via
+  // ::: proof Proof of Theorem 1.2) and an automatic ∎ at the end.
+  md.use(container, 'proof', {
+    render(tokens, idx) {
+      const token = tokens[idx]
+      if (token.nesting === 1) {
+        const title = token.info.trim().slice('proof'.length).trim()
+        const heading = title ? md.renderInline(title) : 'Proof.'
+        return `<div class="proof"><p class="proof-title">${heading}</p>\n`
+      }
+      return '</div>\n'
+    },
+  })
+
   for (const { name, label } of MATH_ENVS) {
     md.use(container, name, {
       render(tokens, idx) {
@@ -108,7 +123,10 @@ export default defineConfig({
   description: 'Notes and exercise solutions for math textbooks',
 
   markdown: {
-    math: true,
+    // Object form is passed through to markdown-it-mathjax3.
+    math: {
+      tex: { macros },
+    },
     config(md) {
       mathEnvPlugin(md)
       tikzPlugin(md)

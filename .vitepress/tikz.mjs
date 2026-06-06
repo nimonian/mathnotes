@@ -4,6 +4,7 @@ import fs from 'node:fs'
 import os from 'node:os'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
+import { macrosAsLatex } from './macros.mjs'
 
 // Compiled SVGs are cached here, keyed on a hash of (preamble + source),
 // so editing one diagram never recompiles the others.
@@ -13,9 +14,12 @@ const CACHE_DIR = fileURLToPath(new URL('./cache/tikz', import.meta.url))
 const PREAMBLE_FILE = fileURLToPath(new URL('./tikz-preamble.tex', import.meta.url))
 
 function readPreamble() {
-  return fs.existsSync(PREAMBLE_FILE)
+  const file = fs.existsSync(PREAMBLE_FILE)
     ? fs.readFileSync(PREAMBLE_FILE, 'utf-8')
     : ''
+  // Shared macros (\Q, \R, ...) are part of the preamble, and therefore
+  // of the cache hash — editing macros.mjs invalidates affected diagrams.
+  return `${macrosAsLatex()}\n${file}`
 }
 
 /** Pull the first error ("! ...") out of a LaTeX log. */

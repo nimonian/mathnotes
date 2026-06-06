@@ -36,7 +36,7 @@ jobs:
         uses: actions/cache@v4
         with:
           path: .vitepress/cache/tikz
-          key: tikz-${{ hashFiles('books/**/*.md', 'index.md', '.vitepress/tikz-preamble.tex', '.vitepress/tikz.mjs') }}
+          key: tikz-${{ hashFiles('books/**/*.md', 'index.md', '.vitepress/tikz-preamble.tex', '.vitepress/tikz.mjs', '.vitepress/macros.mjs') }}
           restore-keys: tikz-
       - name: Install dependencies
         run: npm ci
