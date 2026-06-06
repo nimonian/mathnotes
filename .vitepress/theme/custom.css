@@ -27,15 +27,19 @@
 figure.tikz {
   margin: 24px auto;
   text-align: center;
-  /* Diagrams use currentColor for black strokes/labels, so they follow
-     the theme's text colour in dark mode. */
-  color: var(--vp-c-text-1);
 }
 
 figure.tikz svg {
   display: inline-block;
   max-width: 100%;
   height: auto;
+}
+
+/* Dark mode: invert lightness but keep hues recognisable, so black ink
+   becomes light and dark colours (blue, red, ...) become their legible
+   light counterparts. Applied only to TikZ figures. */
+.dark figure.tikz svg {
+  filter: invert(1) hue-rotate(180deg);
 }
 
 .tikz-error {

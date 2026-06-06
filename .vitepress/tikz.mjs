@@ -35,10 +35,15 @@ function extractLatexError(logFile, proc) {
  * Compile a TikZ fence to SVG via latex + dvisvgm.
  * Returns { svg } on success or { error } on failure.
  */
+const DVISVGM_ARGS = ['--no-fonts', '--exact-bbox']
+
 function compileTikz(source) {
   const preamble = readPreamble()
+  // Hash includes the dvisvgm args so pipeline changes invalidate the cache.
   const hash = crypto
     .createHash('sha256')
+    .update(DVISVGM_ARGS.join(' '))
+    .update('\0')
     .update(preamble)
     .update('\0')
     .update(source)
@@ -77,11 +82,11 @@ function compileTikz(source) {
       return { error: extractLatexError(path.join(tmp, 'diagram.log'), latex) }
     }
 
-    // --currentcolor maps black to currentColor so diagrams follow the
-    // page text colour (i.e. dark mode works for free).
+    // Colours are left as authored; dark mode is handled in CSS with an
+    // invert + hue-rotate filter on the rendered SVG.
     const dvisvgm = spawnSync(
       'dvisvgm',
-      ['--no-fonts', '--currentcolor', '--exact-bbox', '-o', 'diagram.svg', 'diagram.dvi'],
+      DVISVGM_ARGS.concat(['-o', 'diagram.svg', 'diagram.dvi']),
       { cwd: tmp, encoding: 'utf-8', timeout: 60_000 },
     )
     if (dvisvgm.status !== 0) {
