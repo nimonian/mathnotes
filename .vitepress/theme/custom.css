@@ -1,0 +1,44 @@
+/* Math environments (theorem, lemma, corollary, ...) */
+
+.math-env {
+  margin: 16px 0;
+  padding: 12px 20px;
+  border-radius: 8px;
+  background-color: var(--vp-c-bg-soft);
+  border-left: 4px solid var(--vp-c-divider);
+}
+
+.math-env .math-env-title {
+  font-weight: 700;
+  margin: 0;
+}
+
+.math-env .math-env-name {
+  font-weight: 500;
+  font-style: italic;
+}
+
+.math-env p {
+  margin: 8px 0 0;
+}
+
+/* Accent colour per environment */
+.math-env-definition {
+  border-left-color: var(--vp-c-green-1);
+}
+
+.math-env-lemma {
+  border-left-color: var(--vp-c-yellow-1);
+}
+
+.math-env-proposition {
+  border-left-color: var(--vp-c-purple-1);
+}
+
+.math-env-theorem {
+  border-left-color: var(--vp-c-indigo-1);
+}
+
+.math-env-corollary {
+  border-left-color: var(--vp-c-red-1);
+}
